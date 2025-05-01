@@ -1,37 +1,37 @@
 # DDD (Domain Driven Design)
 
-# Library Management System
+# Library Management System — Clean Architecture Overview
 
-This is a layered architecture diagram for a library management system, showing the flow of a book checkout process.
+Этот проект реализует систему управления библиотекой на основе принципов **Чистой Архитектуры**, разделяя код на слои: Interfaces, Application, Domain, Infrastructure.
 
-## Architecture Overview
+## 📐 Архитектура
 
-```mermaid
-graph TD
-    A[Клиент] -->|HTTP-запрос POST /api/books/take| B[Interfaces]
-    B --> C[Application]
-    C --> D[Domain]
-    D --> E[Infrastructure]
-    
-    A -->|JSON: {bookId, readerId, issueDate}| B
-    B -->|server.ts| B
-    B -->|routes.ts| B
-    B -->|libraryController.ts| C
-    C -->|takeBookUseCase.ts| C
-    C -->|takeBookCommand.ts| C
-    C -->|takeBookValidator.ts| C
-    C -->|bookDto.ts| D
-    D -->|libraryService.ts| D
-    D -->|book.ts| D
-    D -->|loanPolicy.ts| D
-    D -->|bookTakenEvent.ts| E
-    E -->|inMemoryBookRepository.ts| E
-    E -->|emailNotificationService.ts| E
-    
-    E --> D
-    D --> C
-    C --> B
-    B --> A
-    
-    A -->|HTTP-ответ| B
-    B -->|JSON: {id, title, available}| A
+```plaintext
+[Клиент] ----> [Interfaces] ----> [Application] ----> [Domain] ----> [Infrastructure]
+  |                |                   |                  |                |
+  | HTTP-запрос    |                   |                  |                |
+  | POST /api/books/take              |                  |                |
+  | JSON: {bookId, readerId, issueDate}                  |                |
+  v                v                   |                  |                |
+                   | server.ts        |                  |                |
+                   | routes.ts        |                  |                |
+                   | libraryController.ts                |                |
+                   v                   v                  |                |
+                                       | takeBookUseCase.ts                |
+                                       | takeBookCommand.ts               |
+                                       | takeBookValidator.ts             |
+                                       | bookDto.ts                      |
+                                       v                  v                |
+                                                          | libraryService.ts |
+                                                          | book.ts          |
+                                                          | loanPolicy.ts    |
+                                                          | bookTakenEvent.ts|
+                                                          v                v
+                                                                           | inMemoryBookRepository.ts
+                                                                           | emailNotificationService.ts
+                                                                           v
+[Клиент] <---- [Interfaces] <---- [Application] <---- [Domain] <---- [Infrastructure]
+  |                |                   |                  |                |
+  | HTTP-ответ     |                   |                  |                |
+  | JSON: {id, title, available}       |                  |                |
+  v                v                   v                  v                v
