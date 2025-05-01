@@ -1,10 +1,6 @@
 # DDD (Domain Driven Design)
 
-# Library Management System — Clean Architecture Overview
-
-Этот проект реализует систему управления библиотекой на основе принципов **Чистой Архитектуры**, разделяя код на слои: Interfaces, Application, Domain, Infrastructure.
-
-## 📐 Архитектура
+## 📐 Architecture
 
 ```plaintext
 [Клиент] ----> [Interfaces] ----> [Application] ----> [Domain] ----> [Infrastructure]
