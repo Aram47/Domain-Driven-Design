@@ -1,0 +1,5 @@
+CREATE TABLE books (
+  id VARCHAR(50) PRIMARY KEY,
+  title VARCHAR(100) NOT NULL,
+  available BOOLEAN DEFAULT TRUE
+);

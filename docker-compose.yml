@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: mongodb://mongo:27017/DDD
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+    volumes:
+      - ./src:/app
+
+  mongo:
+    image: mongo:6
+    environment:
+      MONGO_INITDB_DATABASE: DDD
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo_data:
